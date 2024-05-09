@@ -1,15 +1,15 @@
 #!/bin/bash
 
-OPUS_REPO="https://github.com/xiph/opus.git"
-OPUS_COMMIT="20568812ae92bb148fe3fb0190b7629f1c4d0b96"
+XZ_REPO="https://github.com/tukaani-project/xz.git"
+XZ_COMMIT="3f71e0f3a118e1012526f94fd640a626d30cb599"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    git-mini-clone "$OPUS_REPO" "$OPUS_COMMIT" opus
-    cd opus
+    git-mini-clone "$XZ_REPO" "$XZ_COMMIT" xz
+    cd xz
 
     mkdir build && cd build
 
@@ -18,18 +18,19 @@ ffbuild_dockerbuild() {
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX="$FFBUILD_PREFIX" \
         -DBUILD_{SHARED_LIBS,TESTING}=OFF \
-        -DOPUS_BUILD_{PROGRAMS,SHARED_LIBRARY,TESTING}=OFF \
-        -DOPUS_FORTIFY_SOURCE=OFF \
+        -DENABLE_THREADS=posix \
+        -DCMAKE_USE_PTHREADS_INIT=ON \
         -GNinja \
         ..
+
     ninja -j"$(nproc)"
     ninja install
 }
 
 ffbuild_configure() {
-    echo --enable-libopus
+    echo --enable-lzma
 }
 
 ffbuild_unconfigure() {
-    echo --disable-libopus
+    echo --disable-lzma
 }

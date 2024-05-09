@@ -63,6 +63,19 @@ cat <<EOF >"$BUILD_SCRIPT"
 
     git clone --filter=tree:0 --branch='$GIT_BRANCH' --single-branch '$FFMPEG_REPO' ffmpeg
     cd ffmpeg
+    git checkout n7.0
+
+    curl https://patchwork.ffmpeg.org/series/9992/mbox/ -o Add-support-for-H266-VVC.patch
+    git apply Add-support-for-H266-VVC.patch --exclude=libavcodec/version.h
+
+    curl https://x266.mov/files/ffmpeg-ac4.patch -o Add-Support-for-AC4-Decode.patch
+    git apply Add-Support-for-AC4-Decode.patch
+
+    curl https://x266.mov/files/lavf-matroska-vvc-muxing.patch -o Add-Support-for-VVC-Muxing.patch
+    git apply Add-Support-for-VVC-Muxing.patch
+
+    curl https://x266.mov/files/lavf-matroska-vvc-demuxing.patch -o Add-Support-for-VVC-Demuxing.patch
+    git apply Add-Support-for-VVC-Demuxing.patch
 
     ./configure --prefix=/ffbuild/prefix --pkg-config-flags="--static" \$FFBUILD_TARGET_FLAGS $FF_CONFIGURE \
         --extra-cflags="$FF_CFLAGS" --extra-cxxflags="$FF_CXXFLAGS" \
