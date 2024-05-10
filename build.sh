@@ -63,7 +63,7 @@ cat <<EOF >"$BUILD_SCRIPT"
 
     git clone '$FFMPEG_REPO' ffmpeg
     cd ffmpeg
-    release/7.0
+    git checkout release/7.0
 
     curl -O https://patchwork.ffmpeg.org/series/11673/mbox/ -o Add-support-for-H266-VVC.patch
     git apply Add-support-for-H266-VVC.patch
