@@ -48,7 +48,7 @@ rm -f "$TESTFILE"
 rm -rf ffbuild
 mkdir ffbuild
 
-FFMPEG_REPO="${FFMPEG_REPO:-https://github.com/FFmpeg/FFmpeg.git}"
+FFMPEG_REPO="${FFMPEG_REPO:-https://git.ffmpeg.org/ffmpeg.git}"
 FFMPEG_REPO="${FFMPEG_REPO_OVERRIDE:-$FFMPEG_REPO}"
 GIT_BRANCH="${GIT_BRANCH:-master}"
 GIT_BRANCH="${GIT_BRANCH_OVERRIDE:-$GIT_BRANCH}"
@@ -61,12 +61,12 @@ cat <<EOF >"$BUILD_SCRIPT"
     cd /ffbuild
     rm -rf ffmpeg prefix
 
-    git clone --branch='$GIT_BRANCH' '$FFMPEG_REPO' ffmpeg
+    git clone '$FFMPEG_REPO' ffmpeg
     cd ffmpeg
-    git checkout n7.0
+    release/7.0
 
-    curl https://patchwork.ffmpeg.org/series/9992/mbox/ -o Add-support-for-H266-VVC.patch
-    git apply Add-support-for-H266-VVC.patch --exclude=libavcodec/version.h
+    curl -O https://patchwork.ffmpeg.org/series/11673/mbox/ -o Add-support-for-H266-VVC.patch
+    git apply Add-support-for-H266-VVC.patch
 
     curl https://x266.mov/files/ffmpeg-ac4.patch -o Add-Support-for-AC4-Decode.patch
     git apply Add-Support-for-AC4-Decode.patch
