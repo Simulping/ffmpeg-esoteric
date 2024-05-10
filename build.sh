@@ -61,7 +61,7 @@ cat <<EOF >"$BUILD_SCRIPT"
     cd /ffbuild
     rm -rf ffmpeg prefix
 
-    git clone --filter=tree:0 --branch='$GIT_BRANCH' --single-branch '$FFMPEG_REPO' ffmpeg
+    git clone --branch='$GIT_BRANCH' '$FFMPEG_REPO' ffmpeg
     cd ffmpeg
     git checkout n7.0
 
