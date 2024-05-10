@@ -65,7 +65,7 @@ cat <<EOF >"$BUILD_SCRIPT"
     cd ffmpeg
     git checkout release/7.0
 
-    curl -O https://patchwork.ffmpeg.org/series/11673/mbox/ -o Add-support-for-H266-VVC.patch
+    curl https://patchwork.ffmpeg.org/series/11673/mbox/ -o Add-support-for-H266-VVC.patch
     git apply Add-support-for-H266-VVC.patch
 
     curl https://x266.mov/files/ffmpeg-ac4.patch -o Add-Support-for-AC4-Decode.patch
