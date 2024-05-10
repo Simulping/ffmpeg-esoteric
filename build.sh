@@ -68,9 +68,6 @@ cat <<EOF >"$BUILD_SCRIPT"
     curl https://patchwork.ffmpeg.org/series/11673/mbox/ -o Add-support-for-H266-VVC.patch
     git apply Add-support-for-H266-VVC.patch
 
-    curl https://x266.mov/files/ffmpeg-ac4.patch -o Add-Support-for-AC4-Decode.patch
-    git apply Add-Support-for-AC4-Decode.patch
-
     curl https://x266.mov/files/lavf-matroska-vvc-muxing.patch -o Add-Support-for-VVC-Muxing.patch
     git apply Add-Support-for-VVC-Muxing.patch
 
