@@ -1,15 +1,15 @@
 #!/bin/bash
 
-DAV1D_REPO="https://github.com/videolan/dav1d.git"
-DAV1D_COMMIT="2d2c6c65a5e6a07f349f127168d98abe1ffe26ce"
+LC3_REPO="https://github.com/google/liblc3.git"
+LC3_COMMIT="ac02cce7c3438d617770bcda17f97a5241c1709d"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    git-mini-clone "$DAV1D_REPO" "$DAV1D_COMMIT" dav1d
-    cd dav1d
+    git-mini-clone "$LC3_REPO" "$LC3_COMMIT" lc3
+    cd lc3
 
     mkdir build && cd build
 
@@ -17,8 +17,6 @@ ffbuild_dockerbuild() {
         --prefix="$FFBUILD_PREFIX"
         --buildtype=release
         -Ddefault_library=static
-        -Denable_{tests,tools}"=false"
-        -Dlogging=false
     )
 
     if [[ $TARGET == win* ]]; then
@@ -36,9 +34,9 @@ ffbuild_dockerbuild() {
 }
 
 ffbuild_configure() {
-    echo --enable-libdav1d
+    echo --enable-liblc3
 }
 
 ffbuild_unconfigure() {
-    echo --disable-libdav1d
+    echo --disable-liblc3
 }
