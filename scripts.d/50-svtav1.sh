@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SVTAV1_REPO="https://github.com/gianni-rosato/svt-av1-psy"
-SVTAV1_COMMIT="70e5a3ddb96cd8a1ea7785203f7001ac971517e3"
+SVTAV1_COMMIT="37a5609bcc20bbf40203b8c4736d906af1a259d3"
 
 ffbuild_enabled() {
     [[ $TARGET == win32 ]] && return -1
